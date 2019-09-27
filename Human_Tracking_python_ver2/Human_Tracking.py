@@ -210,6 +210,7 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 		return RTC.RTC_OK
 
 #尤度算出関数
+
 def likelihood(x,y,func,image, w=30,h=30):
 	x1 = max(0,x - w/2)
 	y1 = max(0,y - h/2)
