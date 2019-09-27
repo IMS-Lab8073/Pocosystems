@@ -1,0 +1,10 @@
+2019-09-27 19:50:20,954 file.manager INFO 1.2.0
+2019-09-27 19:50:20,956 file.manager INFO Copyright (C) 2003-2010
+2019-09-27 19:50:20,956 file.manager INFO   Noriaki Ando
+2019-09-27 19:50:20,956 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-09-27 19:50:20,956 file.manager INFO Manager starting.
+2019-09-27 19:50:20,956 file.manager INFO Starting local logging.
+2019-09-27 19:50:22,983 file.manager.namingmanager INFO NameServer connection failed: corba/localhost
+2019-09-27 19:50:25,016 file.ManagerServant INFO Master manager not found
+2019-09-27 19:50:25,020 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-09-27 19:50:25,038 file.manager ERROR createComponent: RTC creation failed: Human_Tracking
