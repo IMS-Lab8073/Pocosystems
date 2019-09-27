@@ -206,11 +206,37 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 		return RTC.RTC_OK
 
 	def onExecute(self, ec_id):
+		def is_green(region):
+			return (region >= 50) | (region < 85)
+
+		cap = cv2.VideoCapture(0)
+		particles = None
+
+		while cv2.waitKey(30) < 0:
+			_, frame = cap.read()
+			frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV_FULL)
+			frame_h = frame_hsv[:, :, 0]
+			_, frame_s = cv2.threshold(frame_hsv[:, :, 1], 0, 255, cv2.THRESH_BINARY|cv2.THRESH_OTSU)
+			_, frame_v = cv2.threshold(frame_hsv[:, :, 2], 0, 255, cv2.THRESH_BINARY|cv2.THRESH_OTSU)
+			frame_h[(frame_s == 0) | (frame_v == 0)] = 0
+
+			particles, x, y = particle_filter(particles, is_green, frame_h)
+
+			if particles is not None:
+				valid_particles = particles[(particles[:, 0] >= 0) & (frame.shape[1]) & (particles[:, 1] >= 0) & (particles[:, 1] < frame.shape[0])]
+
+				for i in xrange(valid_particles.shape[0]):
+					frame[valid_particles[i][1], valid_particles[i][0]] = [255, 0, 0]
+				p = np.array([x, y], dtype = np.int32)
+				cv2.rectangle(frame, tuple(p - 15), tuple(p + 15), (0, 0, 255), thickness = 2)
+		
+			cv2.imshow('green', frame)
 	
+		cap.release()
+		cv2.destroyAllWindows()	
 		return RTC.RTC_OK
 
 #尤度算出関数
-
 def likelihood(x,y,func,image, w=30,h=30):
 	x1 = max(0,x - w/2)
 	y1 = max(0,y - h/2)
@@ -306,32 +332,4 @@ def main():
 
 if __name__ == "__main__":
 	main()
-	def is_green(region):
-		return (region >= 50) | (region < 85)
-
-	cap = cv2.VideoCapture(0)
-	particles = None
-
-	while cv2.waitKey(30) < 0:
-		_, frame = cap.read()
-		frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV_FULL)
-		frame_h = frame_hsv[:, :, 0]
-		_, frame_s = cv2.threshold(frame_hsv[:, :, 1], 0, 255, cv2.THRESH_BINARY|cv2.THRESH_OTSU)
-		_, frame_v = cv2.threshold(frame_hsv[:, :, 2], 0, 255, cv2.THRESH_BINARY|cv2.THRESH_OTSU)
-		frame_h[(frame_s == 0) | (frame_v == 0)] = 0
-
-		particles, x, y = particle_filter(particles, is_green, frame_h)
-
-		if particles is not None:
-			valid_particles = particles[(particles[:, 0] >= 0) & (frame.shape[1]) & (particles[:, 1] >= 0) & (particles[:, 1] < frame.shape[0])]
-
-			for i in xrange(valid_particles.shape[0]):
-				frame[valid_particles[i][1], valid_particles[i][0]] = [255, 0, 0]
-			p = np.array([x, y], dtype = np.int32)
-			cv2.rectangle(frame, tuple(p - 15), tuple(p + 15), (0, 0, 255), thickness = 2)
-		
-		cv2.imshow('green', frame)
-	
-	cap.release()
-	cv2.destroyAllWindows()
 
