@@ -76,15 +76,16 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 	def __init__(self, manager):
 		OpenRTM_aist.DataFlowComponentBase.__init__(self, manager)
 
-		self._d_Range_data = RTC.RangeData(RTC.Time(0,0),"null")
+		self._d_Range_data = RTC.RangeData(RTC.Time(0,0), [], RTC.RangerGeometry(RTC.Geometry3D(RTC.Pose3D(RTC.Point3D(0.0,0.0,0.0), RTC.Orientation3D(0.0,0.0,0.0)), RTC.Size3D(0.0,0.0,0.0)), []), RTC.RangerConfig(*([0.0]*7)))
+		# self._d_Range_data = RTC.RangeData(RTC.Time(0,0), RTC.double[0])
 		"""
 		"""
 		self._Range_dataIn = OpenRTM_aist.InPort("Range_data", self._d_Range_data)
-		self._d_human_dataX = RTC.TimedOctet(RTC.Time(0,0),"null")
+		self._d_human_dataX = RTC.TimedLongSeq(RTC.Time(0,0), [0]*2)
 		"""
 		"""
 		self._human_dataXOut = OpenRTM_aist.OutPort("human_dataX", self._d_human_dataX)
-		self._d_human_dataY = RTC.TimedLongSeq(RTC.Time(0,0),"null")
+		self._d_human_dataY = RTC.TimedLongSeq(RTC.Time(0,0), [0]*2)
 		"""
 		"""
 		self._human_dataYOut = OpenRTM_aist.OutPort("human_dataY", self._d_human_dataY)
