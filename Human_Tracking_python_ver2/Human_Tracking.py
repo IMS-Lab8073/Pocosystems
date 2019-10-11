@@ -16,6 +16,7 @@ import datetime
 import math
 import csv
 import cv2
+import TkLRFViewer_HT
 import numpy as np
 from numpy.random import*
 
@@ -126,11 +127,17 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 	def __init__(self, manager):
 		OpenRTM_aist.DataFlowComponentBase.__init__(self, manager)
 
-		self._d_Range_data = RTC.RangeData(RTC.Time(0,0), [], RTC.RangerGeometry(RTC.Geometry3D(RTC.Pose3D(RTC.Point3D(0.0,0.0,0.0), RTC.Orientation3D(0.0,0.0,0.0)), RTC.Size3D(0.0,0.0,0.0)), []), RTC.RangerConfig(*([0.0]*7)))
+		_pose3D = RTC.Pose3D(RTC.Point3D(0.0, 0.0, 0.0), RTC.Orientation3D(0.0, 0.0, 0.0))
+		_size3D = RTC.Size3D(0.0, 0.0, 0.0)
+		_geometry3D = RTC.Geometry3D(_pose3D, _size3D)
+		_rangerConfig = RTC.RangerConfig(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+		self._d_Range_data = RTC.RangeData(RTC.Time(0,0), [], RTC.RangerGeometry(_geometry3D, []), _rangerConfig)
+		self._Range_dataIn = OpenRTM_aist.InPort("range_data", self._d_Range_data)
+		# self._d_Range_data = RTC.RangeData(RTC.Time(0,0), [], RTC.RangerGeometry(RTC.Geometry3D(RTC.Pose3D(RTC.Point3D(0.0,0.0,0.0), RTC.Orientation3D(0.0,0.0,0.0)), RTC.Size3D(0.0,0.0,0.0)), []), RTC.RangerConfig(*([0.0]*7)))
 		# self._d_Range_data = RTC.RangeData(RTC.Time(0,0), RTC.double[0])
 		"""
 		"""
-		self._Range_dataIn = OpenRTM_aist.InPort("Range_data", self._d_Range_data)
+		# self._Range_dataIn = OpenRTM_aist.InPort("Range_data", self._d_Range_data)
 		self._d_human_dataX = RTC.TimedLongSeq(RTC.Time(0,0), [0]*2)
 		"""
 		"""
@@ -191,6 +198,8 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 		self._m_qHuman = struct_human('qHuman1')
 		self._m_qHuman2 = struct_human('qHuman2')
 		self._m_data = struct_Data('data')
+
+		self._veiwer = TkLRFViewer_HT.LRFViewer
 
 		self._NUM_Hmax = 11
 		# self._move_trace = [[0]*self._NUM_Hmax]*self._NUM_Hmax
@@ -327,12 +336,15 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 		return RTC.RTC_OK
 
 	def onExecute(self, ec_id):
+		# SM = len(self._m_data._men_data_x)
+		# print(SM)
 		if self._Range_dataIn.isNew():
-			LRFData_IN()					# 新しいデータを取得
-			strong_pass_filter(10, 6)		# 密度が低過ぎるデータの有効フラグを折る（ごみ取り）{前後のスキャン範囲,有効データ数}以下のデータが対象
-			weak_add_filter(5, 5)			# 密度が高い場所にあるデータの欠落を補完（穴埋め）
-			parson_devid_methon(10, 4, 3, 300)	# サブ計測結果として得られたデータをオブジジェェクトごとに分ける
-			LRFPocoHuman()						# マッチングによる複数人追跡
+			
+			LRFData_IN(self)					# 新しいデータを取得
+			strong_pass_filter(self, 10, 6)		# 密度が低過ぎるデータの有効フラグを折る（ごみ取り）{前後のスキャン範囲,有効データ数}以下のデータが対象
+			weak_add_filter(self, 5, 5)			# 密度が高い場所にあるデータの欠落を補完（穴埋め）
+			parson_devid_methon(self, 10, 4, 3, 300)	# サブ計測結果として得られたデータをオブジジェェクトごとに分ける
+			LRFPocoHuman()							# マッチングによる複数人追跡
 
 			# 表示部分
 
@@ -379,21 +391,26 @@ def LRFData_IN(self):
 	LRF_theta = self._LRFdata_theta[0]
 	LRF_step = self._LRF_Total_steps[0]
 
-	count = LRF_start
+	# count = LRF_start
 	# men_data_x = [1100]		# 生データ
 	# men_data_x2 = [1100]	# 更新用データ(外周を書く時に使う関数)
 	# different_search = []
 
-	self._Range_dataIn.read()
-	while count <= LRF_end:
-		self._m_data._men_data_x[count] = self._d_Range_data.ranges[count]
+	# self._Range_dataIn.read()
+	# print(LRF_start, LRF_end)
+	# SA = len(self._d_Range_data.ranges)
+	# print(SA)
+	# while count <= LRF_end:
+	for count in range(LRF_start, LRF_end + 1):
+		# print(count)
+		self._m_data._men_data_x[count] = self._d_Range_data.ranges			# self._d_Range_data.ranges[count]
 		if self._m_data._men_data_x[count] > self._Enviromental_maxdata[0]:
 			self._m_data._men_data_x[count] = self._Enviromental_maxdata[0]
 		elif self._m_data._men_data_x[count] < 0:
 			self._m_data._men_data_x[count] = 0
 
 		if self._m_data._men_data_x2[count] == 0:
-			self._m_data._men_data_x2[count] = self._men_data_x[count]
+			self._m_data._men_data_x2[count] = self._m_data._men_data_x[count]				# self._men_data_x[count]
 		# 有効データが得られた場合
 		elif self._m_data._men_data_x2[count] != 0:
 			# 元のデータよりも距離の大きいデータが得られた場合は情報を更新する
@@ -419,7 +436,7 @@ def LRFData_IN(self):
 				if self._m_data._men_data_x2[count] == self._Enviromental_maxdata[0]:
 					self._m_data._m_different_search[count] =0
 
-		count = count + 1
+		# count = count + 1
 
 # 密度の低い部分を除外する関数
 def strong_pass_filter(self, scan_range, filter_limit):
@@ -570,23 +587,23 @@ def LRFPocoHuman(self):
 	# 入退室後や長時間残っている人データを削除するためにカウントを行う。また、追跡エリア以外で速度が小さいものも削除対象
 	HUMAN_DELETE(self._human)
 
-# 初期化関数(途中)
-def Human_Initialize(self):
-	self._m_qHuman = object.__new__(struct_human)
-	self._m_qHuman2 = object.__new__(struct_human)
-	self._m_data = object.__new__(struct_Data)
+	# 初期化関数(途中)
+	def Human_Initialize(self):
+		self._m_qHuman = object.__new__(struct_human)
+		self._m_qHuman2 = object.__new__(struct_human)
+		self._m_data = object.__new__(struct_Data)
 
-	self._ppx_d = 0
-	self._ppy_d = 0
-	self._theta = 0
-	self._G_dist = 0
+		self._ppx_d = 0
+		self._ppy_d = 0
+		self._theta = 0
+		self._G_dist = 0
 
-	i = 0
-	while i <= self._Human_NUM:
-		s2 = 0
-		while s2 < self._Human_NUM:
-			self._Tracking_check[i][s2] = 0
-			self._m_qHuman = 0
+		i = 0
+		while i <= self._Human_NUM:
+			s2 = 0
+			while s2 < self._Human_NUM:
+				self._Tracking_check[i][s2] = 0
+				self._m_qHuman = 0
 
 # 更新データを出力する関数
 def Data_outport(self):
@@ -1205,6 +1222,12 @@ def MyModuleInit(manager):
     comp = manager.createComponent("Human_Tracking")
 
 def main():
+	"""
+	m = TkLRFViewer_HT.TkLRFViewer(Tk())
+	m.master.title("Human_Tracking_Veiwer")
+	"""
+	VW = TkLRFViewer_HT.main()
+
 	mgr = OpenRTM_aist.Manager.init(sys.argv)
 	mgr.setModuleInitProc(MyModuleInit)
 	mgr.activateManager()
