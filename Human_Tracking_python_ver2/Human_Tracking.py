@@ -19,6 +19,7 @@ import cv2
 import TkLRFViewer_HT
 import numpy as np
 from numpy.random import*
+import drawgraph
 
 # Import RTM module
 import RTC
@@ -324,6 +325,7 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 
 	def onActivated(self, ec_id):
 		self._first_flag = 1
+		# drawgraph.switch_graph("on")
 		print("on Activate")
 		return RTC.RTC_OK
 	
@@ -332,6 +334,8 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 		del self._human		# 各人の歩行情報(構造体)データ解放
 		del self._human2	# 各人の歩行情報(構造体)データ解放
 		del self._m_data	# 環境データ及び生データ解放
+		# drawgraph.switch_graph("off")
+		drawgraph.graoh_plot(self._d_human_dataX.data)
 		print("on Deactivate")
 		return RTC.RTC_OK
 
@@ -343,12 +347,14 @@ class Human_Tracking(OpenRTM_aist.DataFlowComponentBase):
 			LRFData_IN(self)					# 新しいデータを取得
 			strong_pass_filter(self, 10, 6)		# 密度が低過ぎるデータの有効フラグを折る（ごみ取り）{前後のスキャン範囲,有効データ数}以下のデータが対象
 			weak_add_filter(self, 5, 5)			# 密度が高い場所にあるデータの欠落を補完（穴埋め）
-			parson_devid_methon(self, 10, 4, 3, 300)	# サブ計測結果として得られたデータをオブジジェェクトごとに分ける
-			LRFPocoHuman()							# マッチングによる複数人追跡
+			# parson_devid_methon(self, 10, 4, 3, 300)	# サブ計測結果として得られたデータをオブジジェェクトごとに分ける
+			# LRFPocoHuman()							# マッチングによる複数人追跡
 
+			# drawgraph.pause_plot(self._d_human_dataX.data, self._d_human_dataY.data)
+			
 			# 表示部分
 
-			Data_outport()
+			# Data_outport()
 
 		"""
 		def is_green(region):
@@ -403,7 +409,12 @@ def LRFData_IN(self):
 	# while count <= LRF_end:
 	for count in range(LRF_start, LRF_end + 1):
 		# print(count)
-		self._m_data._men_data_x[count] = self._d_Range_data.ranges			# self._d_Range_data.ranges[count]
+		_rangeData = self._Range_dataIn.read()
+		# sample = _rangeData.ranges
+		# print(sample)
+		# self._m_data._men_data_x[count] = self._d_Range_data.ranges[count]			# self._d_Range_data.ranges[count]
+		self._m_data._men_data_x[count] = _rangeData.ranges[count]
+		# print(self._m_data._men_data_x[count])
 		if self._m_data._men_data_x[count] > self._Enviromental_maxdata[0]:
 			self._m_data._men_data_x[count] = self._Enviromental_maxdata[0]
 		elif self._m_data._men_data_x[count] < 0:
@@ -416,22 +427,29 @@ def LRFData_IN(self):
 			# 元のデータよりも距離の大きいデータが得られた場合は情報を更新する
 			if self._m_data._men_data_x[count] > self._m_data._men_data_x2[count]:
 				self._m_data._men_data_x2[count] = self._m_data._men_data_x[count]
+				# print("1")
 			# 元データよりも9割以下の場合は人がいると判断(背景差分法)
 			elif self._m_data._men_data_x[count]/self._m_data._men_data_x2[count] < 0.94:
+				# print("2")
 				# データが10cm以下の場合は無視(ノイズ除去のため)
 				if self._m_data._men_data_x[count] > 10:
+					# print("2-1")
 					# データが有効な場所のフラグを立てる(1ステップ毎に行う．1:有効，0:無効)
 					self._m_data._m_different_search[count] = 1
 				else:
+					# print("2-2")
 					# 無効データの場合はフラグを折る
 					self._m_data._m_different_search[count] = 0
 			else:
+				# print("3")
 				self._m_data._m_different_search[count] = 0
 
 		elif self._m_data._men_data_x2[count] != 0 and self._m_data._men_data_x[count] == 0:
+			# print("4")
 			self._m_data._men_data_x[count] = self._m_data._men_data_x2[count]
 		# 基本となるデータが0の時
 		else:
+			# print("5")
 			if self._m_data._men_data_x[count] == self._Enviromental_maxdata[0]:
 				if self._m_data._men_data_x2[count] == self._Enviromental_maxdata[0]:
 					self._m_data._m_different_search[count] =0
@@ -444,17 +462,28 @@ def strong_pass_filter(self, scan_range, filter_limit):
 	filter_count = 1
 	i1 = self._LRFdata_min[0]
 	# 密度の弱いデータを常にフィルタ処理
-	while i1 <= self._LRFdata_max[0]:
+	# while i1 <= self._LRFdata_max[0]:
+	for i1 in range(self._LRFdata_max[0] + 1):
+		# print("strong_filter:%s" %i1)
 		filter_on = 0
 		if self._m_data._m_different_search[i1] == 1:
-			while filter_count < scan_range:
-				if self._m_data._m_different_search[i1 - filter_count] == 1:
+			print("filter1")
+			# while filter_count < scan_range:
+			for i2 in range(filter_count, scan_range):
+				# if self._m_data._m_different_search[i1 - filter_count] == 1:
+				if self._m_data._m_different_search[i1 - i2] == 1:
+					print("filter2")
 					filter_on = filter_on + 1
-				elif self._m_data._m_different_search[i1 + filter_count] == 1:
+					print("filter_on:%s" %filter_on)
+				# elif self._m_data._m_different_search[i1 + filter_count] == 1:
+				elif self._m_data._m_different_search[i1 + i2] == 1:
+					print("filter3")
 					filter_on = filter_on + 1
-				filter_count = filter_count +1
+					print("filter_on:%s" %filter_on)
+				# filter_count = filter_count +1
 
 			if filter_on < filter_limit:
+				print("filter4")
 				self._m_data._m_different_search[i1] = 0
 				self._move_trace[0][0] -= 1
 				self._move_trace[0][1] -= i1
@@ -464,29 +493,35 @@ def weak_add_filter(self, scan_range, filter_limit):
 	men_data_x_ave = 0
 	i1 = self._LRFdata_min[0]
 	# 距離平均値から大きく外れる値のフラグを折る
-	while i1 <= self._LRFdata_max[0]:
+	# while i1 <= self._LRFdata_max[0]:
+	for i1 in range(self._LRFdata_max[0] + 1):
 		if self._m_data._m_different_search[i1] ==1:
 			# 各データの前10カウントを検査
 			filter_count = 1
-			while filter_count <= scan_range:
+			# while filter_count <= scan_range:
+			for filter_count in range(scan_range + 1):
 				men_data_x_ave += self._m_data._men_data_x[i1]
-				filter_count = filter_count + 1
+				print("average:%s" %men_data_x_ave)
+				# filter_count = filter_count + 1
 
 			men_data_x_ave = men_data_x_ave / scan_range
+			print("total_ave:%s" %men_data_x_ave)
 			filter_count2 = 1
-			while filter_count2 <= scan_range:
+			for filter_count2 in range(scan_range + 1):
+			# while filter_count2 <= scan_range:
 				if abs(men_data_x_ave - self._m_data._men_data_x[i1 + filter_count2]) >300:
 					self._m_data._m_different_search[i1 + filter_count2] = 0
-					filter_count2 = filter_count2 + 1
+					# filter_count2 = filter_count2 + 1
 
-		i1 = i1 +1
+		# i1 = i1 +1
 
 # 複数のオブジェクトを分割する関数
 def parson_devid_methon(self, scan_range, filter_limit, delsize, LimitAveDidtance):
 	parson_X = 1
 	# 背景差分法により得られた1ステップ毎の有効データの連続性を確認
 	i1 = self._LRFdata_min[0]
-	while i1 <= self._LRFdata_max[0]:
+	# while i1 <= self._LRFdata_max[0]:
+	for i1 in range(self._LRFdata_max[0] + 1):
 		if self._m_data._m_different_search[i1] == 1:
 			human_sx = []
 			human_sy = []
@@ -502,16 +537,21 @@ def parson_devid_methon(self, scan_range, filter_limit, delsize, LimitAveDidtanc
 
 			if self._m_data._m_different_search[i1] - self._m_data._m_different_search[i1 - 1] == 1:
 				self._flag_check_start[parson_X] = i1
+				print("data_1:%s" %self._flag_check_start[parson_X])
 			elif self._m_data._m_different_search[i1] - self._m_data._m_different_search[i1 + 1] == 0:
 				if self._human_dr[i1] > 200:
 					self._flag_check_end[parson_X] = i1
+					print("data_2:%s" %self._flag_check_end[parson_X])
 				elif self._human_dr[i1 - 1] > 200 and (self._m_data._m_different_search[i1] - self._m_data._different_search[i1 - 1] == 0):
 					self._flag_check_start[parson_X] = i1
+					print("data_3:%s" %self._flag_check_start[parson_X])
 			elif self._m_data._m_different_search[i1] - self._m_data._m_different_search[i1 + 1] ==1:
 				if self._human_dr[i1 - 1] > 200:
 					self._flag_check_start[parson_X] = 0
+					print("data_4:%s" %self._flag_check_start[parson_X])
 				else:
 					self._flag_check_end[parson_X] = i1
+					print("data_5:%s" %self._flag_check_start[parson_X])
 		
 		# ある程度連続した有効データに対して連続した有効ステップの幅を計算
 		if self._flag_check_start[parson_X] != 0 and self._flag_check_end[parson_X] != 0 and self._flag_check_end[parson_X] != self._flag_check_start[parson_X] and self._flag_check_end[parson_X] > self._flag_check_start[parson_X] and self._flag_check_start[parson_X] > 0 and self._flag_check_end[parson_X] > 0:
@@ -550,7 +590,7 @@ def parson_devid_methon(self, scan_range, filter_limit, delsize, LimitAveDidtanc
 					self._flag_check_end[parson_X] = 0
 					self._move_trace[parson_X][0] = 0
 					self._move_trace[parson_X][1] = 0
-		i = i +1
+		# i = i +1
 
 # X,Y座標に変換する関数
 def trans_mendata_to_pxpy(self, count):
@@ -1226,7 +1266,7 @@ def main():
 	m = TkLRFViewer_HT.TkLRFViewer(Tk())
 	m.master.title("Human_Tracking_Veiwer")
 	"""
-	VW = TkLRFViewer_HT.main()
+	# VW = TkLRFViewer_HT.main()
 
 	mgr = OpenRTM_aist.Manager.init(sys.argv)
 	mgr.setModuleInitProc(MyModuleInit)

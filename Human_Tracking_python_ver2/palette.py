@@ -294,7 +294,7 @@ class LRFrange(ScaledObject):
 #----------------------------------------------------------------
 # TkLRFViewer main windows class
 #----------------------------------------------------------------
-# 
+# 描画について
 class TkLRFViewer(Frame):
     def __init__(self, master=None, width=480, height=480):
         Frame.__init__(self, master)
@@ -352,3 +352,19 @@ class TkLRFViewer(Frame):
 
         self.frame = Frame(self)
         self.frame.pack(side=LEFT)
+
+        # Screen Control
+        self.scrctrl_frame = Frame(self.frame, width=self.wd, height=300,
+                                relief=GROOVE, bd=2)
+        self.scrctrl_frame.pack(side=TOP, fill=X)
+        self.create_scale(self.scrctrl_frame)
+        self.create_checkbutton(self.scrctrl_frame)
+
+
+        self.lrfctrl_frame = Frame(self.frame, width=self.wd, height=300,
+                                relief=GROOVE, bd=2)
+        self.lrfctrl_frame.pack(side=TOP, fill=X)
+        self.lrf = LRFrange(self)
+        self.lrf.create_ctrl(self.lrfctrl_frame)
+
+        return
