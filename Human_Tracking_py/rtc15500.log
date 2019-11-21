@@ -1,0 +1,27 @@
+2019-11-21 15:23:22,006 file.manager INFO 1.2.0
+2019-11-21 15:23:22,007 file.manager INFO Copyright (C) 2003-2010
+2019-11-21 15:23:22,009 file.manager INFO   Noriaki Ando
+2019-11-21 15:23:22,009 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-21 15:23:22,009 file.manager INFO Manager starting.
+2019-11-21 15:23:22,009 file.manager INFO Starting local logging.
+2019-11-21 15:23:22,016 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-21 15:23:24,053 file.ManagerServant INFO Master manager not found
+2019-11-21 15:23:24,058 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:23:24,059 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:23:24,081 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-21 15:23:24,092 file.ec_base INFO setRate(1000000.000000) done
+2019-11-21 15:23:24,094 file.ec_base INFO setRate(1000.000000) done
+2019-11-21 15:23:24,098 file.rtobject INFO 1 execution context was created.
+2019-11-21 15:23:24,111 file.rtobject INFO Initial active configuration set is default.
+2019-11-21 15:23:35,950 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-21 15:23:35,951 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-21 15:23:36,232 file.ManagerServant INFO Master manager not found
+2019-11-21 15:23:48,461 file.ManagerServant INFO Master manager not found
+2019-11-21 15:24:00,658 file.ManagerServant INFO Master manager not found
+2019-11-21 15:24:12,885 file.ManagerServant INFO Master manager not found
+2019-11-21 15:24:25,194 file.ManagerServant INFO Master manager not found
+2019-11-21 15:24:37,362 file.ManagerServant INFO Master manager not found
+2019-11-21 15:24:49,479 file.ManagerServant INFO Master manager not found
+2019-11-21 15:25:01,611 file.ManagerServant INFO Master manager not found
+2019-11-21 15:25:13,749 file.ManagerServant INFO Master manager not found
+2019-11-21 15:25:25,867 file.ManagerServant INFO Master manager not found

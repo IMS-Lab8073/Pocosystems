@@ -1,0 +1,28 @@
+2019-11-19 17:10:04,122 file.manager INFO 1.2.0
+2019-11-19 17:10:04,124 file.manager INFO Copyright (C) 2003-2010
+2019-11-19 17:10:04,124 file.manager INFO   Noriaki Ando
+2019-11-19 17:10:04,124 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-19 17:10:04,125 file.manager INFO Manager starting.
+2019-11-19 17:10:04,125 file.manager INFO Starting local logging.
+2019-11-19 17:10:04,141 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-19 17:10:06,177 file.ManagerServant INFO Master manager not found
+2019-11-19 17:10:06,183 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-19 17:10:06,184 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-19 17:10:06,206 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-19 17:10:06,217 file.ec_base INFO setRate(1000000.000000) done
+2019-11-19 17:10:06,219 file.ec_base INFO setRate(1000.000000) done
+2019-11-19 17:10:06,221 file.rtobject INFO 1 execution context was created.
+2019-11-19 17:10:06,236 file.rtobject INFO Initial active configuration set is default.
+2019-11-19 17:10:08,540 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-19 17:10:08,540 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-19 17:10:18,431 file.ManagerServant INFO Master manager not found
+2019-11-19 17:10:30,732 file.ManagerServant INFO Master manager not found
+2019-11-19 17:10:43,010 file.ManagerServant INFO Master manager not found
+2019-11-19 17:10:55,298 file.ManagerServant INFO Master manager not found
+2019-11-19 17:11:07,494 file.ManagerServant INFO Master manager not found
+2019-11-19 17:11:19,686 file.ManagerServant INFO Master manager not found
+2019-11-19 17:11:31,961 file.ManagerServant INFO Master manager not found
+2019-11-19 17:11:44,201 file.ManagerServant INFO Master manager not found
+2019-11-19 17:11:51,743 file.ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2019-11-19 17:11:51,752 file.ec_worker WARNING ExecutionContext is already stopped.
+2019-11-19 17:11:51,752 file.ec_base ERROR Invoking on_shutdown() for each RTC failed.

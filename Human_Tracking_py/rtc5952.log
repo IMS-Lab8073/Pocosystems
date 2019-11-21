@@ -1,0 +1,44 @@
+2019-11-21 15:33:48,453 file.manager INFO 1.2.0
+2019-11-21 15:33:48,454 file.manager INFO Copyright (C) 2003-2010
+2019-11-21 15:33:48,454 file.manager INFO   Noriaki Ando
+2019-11-21 15:33:48,456 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-21 15:33:48,456 file.manager INFO Manager starting.
+2019-11-21 15:33:48,456 file.manager INFO Starting local logging.
+2019-11-21 15:33:48,471 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-21 15:33:50,510 file.ManagerServant INFO Master manager not found
+2019-11-21 15:33:50,517 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:33:50,520 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:33:50,539 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-21 15:33:50,552 file.ec_base INFO setRate(1000000.000000) done
+2019-11-21 15:33:50,552 file.ec_base INFO setRate(1000.000000) done
+2019-11-21 15:33:50,556 file.rtobject INFO 1 execution context was created.
+2019-11-21 15:33:50,571 file.rtobject INFO Initial active configuration set is default.
+2019-11-21 15:33:51,953 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-21 15:33:51,953 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-21 15:33:59,469 file.rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\OpenRTM_aist\RTObject.py", line 1571, in on_execute
+    ret = self.onExecute(ec_id)
+  File "c:\workspace\Human_Tracking_py\Human_Tracking_py.py", line 185, in onExecute
+    self.x_seq=r_seq[45:726]*np.cos(th_seq)
+NameError: global name 'r_seq' is not defined
+
+2019-11-21 15:34:02,710 file.ManagerServant INFO Master manager not found
+2019-11-21 15:34:14,947 file.ManagerServant INFO Master manager not found
+2019-11-21 15:34:27,144 file.ManagerServant INFO Master manager not found
+2019-11-21 15:34:39,355 file.ManagerServant INFO Master manager not found
+2019-11-21 15:34:51,569 file.ManagerServant INFO Master manager not found
+2019-11-21 15:35:03,845 file.ManagerServant INFO Master manager not found
+2019-11-21 15:35:16,069 file.ManagerServant INFO Master manager not found
+2019-11-21 15:35:28,276 file.ManagerServant INFO Master manager not found
+2019-11-21 15:35:40,506 file.ManagerServant INFO Master manager not found
+2019-11-21 15:35:52,710 file.ManagerServant INFO Master manager not found
+2019-11-21 15:36:04,941 file.ManagerServant INFO Master manager not found
+2019-11-21 15:36:17,121 file.ManagerServant INFO Master manager not found
+2019-11-21 15:36:29,354 file.ManagerServant INFO Master manager not found
+2019-11-21 15:36:41,561 file.ManagerServant INFO Master manager not found
+2019-11-21 15:36:53,759 file.ManagerServant INFO Master manager not found
+2019-11-21 15:37:05,977 file.ManagerServant INFO Master manager not found
+2019-11-21 15:37:18,183 file.ManagerServant INFO Master manager not found
+2019-11-21 15:37:30,394 file.ManagerServant INFO Master manager not found
+2019-11-21 15:37:42,582 file.ManagerServant INFO Master manager not found
+2019-11-21 15:37:54,786 file.ManagerServant INFO Master manager not found

@@ -1,0 +1,50 @@
+2019-11-19 16:27:12,364 file.manager INFO 1.2.0
+2019-11-19 16:27:12,365 file.manager INFO Copyright (C) 2003-2010
+2019-11-19 16:27:12,365 file.manager INFO   Noriaki Ando
+2019-11-19 16:27:12,365 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-19 16:27:12,365 file.manager INFO Manager starting.
+2019-11-19 16:27:12,365 file.manager INFO Starting local logging.
+2019-11-19 16:27:14,397 file.manager.namingmanager INFO NameServer connection failed: corba/localhost
+2019-11-19 16:27:16,437 file.ManagerServant INFO Master manager not found
+2019-11-19 16:27:16,447 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-19 16:27:16,450 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-19 16:27:16,471 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-19 16:27:16,484 file.ec_base INFO setRate(1000000.000000) done
+2019-11-19 16:27:16,486 file.ec_base INFO setRate(10.000000) done
+2019-11-19 16:27:16,490 file.rtobject INFO 1 execution context was created.
+2019-11-19 16:27:16,505 file.rtobject INFO Initial active configuration set is default.
+2019-11-19 16:27:26,490 file.manager.namingmanager INFO NameServer connection failed: corba/localhost
+2019-11-19 16:27:30,542 file.ManagerServant INFO Master manager not found
+2019-11-19 16:27:40,657 file.manager.namingmanager INFO NameServer connection failed: corba/localhost
+2019-11-19 16:27:44,734 file.ManagerServant INFO Master manager not found
+2019-11-19 16:27:54,809 file.manager.namingmanager INFO NameServer connection failed: corba/localhost
+2019-11-19 16:27:58,858 file.ManagerServant INFO Master manager not found
+2019-11-19 16:28:06,944 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-19 16:28:06,946 file.manager.namingmanager INFO Connected to a name server: corba/localhost
+2019-11-19 16:28:10,997 file.ManagerServant INFO Master manager not found
+2019-11-19 16:28:15,599 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-19 16:28:15,599 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-19 16:28:18,296 file.rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\OpenRTM_aist\RTObject.py", line 1330, in on_activated
+    ret = self.onActivated(ec_id)
+  File "c:\workspace\Human_Tracking_py\Human_Tracking_py.py", line 158, in onActivated
+    return RTC.RTC_OK
+AttributeError: 'NoneType' object has no attribute 'RTC_OK'
+
+2019-11-19 16:28:18,299 file.rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\OpenRTM_aist\RTObject.py", line 1571, in on_execute
+    ret = self.onExecute(ec_id)
+  File "c:\workspace\Human_Tracking_py\Human_Tracking_py.py", line 200, in onExecute
+    return RTC.RTC_OK
+AttributeError: 'NoneType' object has no attribute 'RTC_OK'
+
+2019-11-19 16:28:18,401 file.rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\OpenRTM_aist\RTObject.py", line 1370, in on_deactivated
+    ret = self.onDeactivated(ec_id)
+  File "c:\workspace\Human_Tracking_py\Human_Tracking_py.py", line 162, in onDeactivated
+    return RTC.RTC_OK
+AttributeError: 'NoneType' object has no attribute 'RTC_OK'
+
+2019-11-19 16:28:23,088 file.ManagerServant INFO Master manager not found
+2019-11-19 16:28:35,191 file.ManagerServant INFO Master manager not found
+2019-11-19 16:28:47,309 file.ManagerServant INFO Master manager not found

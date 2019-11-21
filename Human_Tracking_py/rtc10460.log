@@ -1,0 +1,26 @@
+2019-11-21 15:39:17,513 file.manager INFO 1.2.0
+2019-11-21 15:39:17,513 file.manager INFO Copyright (C) 2003-2010
+2019-11-21 15:39:17,513 file.manager INFO   Noriaki Ando
+2019-11-21 15:39:17,515 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-21 15:39:17,515 file.manager INFO Manager starting.
+2019-11-21 15:39:17,515 file.manager INFO Starting local logging.
+2019-11-21 15:39:17,519 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-21 15:39:19,566 file.ManagerServant INFO Master manager not found
+2019-11-21 15:39:19,572 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:39:19,573 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:39:19,594 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-21 15:39:19,608 file.ec_base INFO setRate(1000000.000000) done
+2019-11-21 15:39:19,608 file.ec_base INFO setRate(1000.000000) done
+2019-11-21 15:39:19,614 file.rtobject INFO 1 execution context was created.
+2019-11-21 15:39:19,628 file.rtobject INFO Initial active configuration set is default.
+2019-11-21 15:39:27,474 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-21 15:39:27,476 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-21 15:39:31,723 file.ManagerServant INFO Master manager not found
+2019-11-21 15:39:43,943 file.ManagerServant INFO Master manager not found
+2019-11-21 15:39:56,062 file.ManagerServant INFO Master manager not found
+2019-11-21 15:40:08,177 file.ManagerServant INFO Master manager not found
+2019-11-21 15:40:20,299 file.ManagerServant INFO Master manager not found
+2019-11-21 15:40:32,417 file.ManagerServant INFO Master manager not found
+2019-11-21 15:40:44,536 file.ManagerServant INFO Master manager not found
+2019-11-21 15:40:56,655 file.ManagerServant INFO Master manager not found
+2019-11-21 15:41:08,798 file.ManagerServant INFO Master manager not found

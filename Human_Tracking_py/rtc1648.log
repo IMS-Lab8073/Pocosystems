@@ -1,0 +1,34 @@
+2019-11-20 16:21:12,006 file.manager INFO 1.2.0
+2019-11-20 16:21:12,006 file.manager INFO Copyright (C) 2003-2010
+2019-11-20 16:21:12,006 file.manager INFO   Noriaki Ando
+2019-11-20 16:21:12,006 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-20 16:21:12,007 file.manager INFO Manager starting.
+2019-11-20 16:21:12,007 file.manager INFO Starting local logging.
+2019-11-20 16:21:12,013 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-20 16:21:14,039 file.ManagerServant INFO Master manager not found
+2019-11-20 16:21:14,045 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-20 16:21:14,048 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-20 16:21:14,076 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-20 16:21:14,094 file.ec_base INFO setRate(1000000.000000) done
+2019-11-20 16:21:14,095 file.ec_base INFO setRate(100.000000) done
+2019-11-20 16:21:14,098 file.rtobject INFO 1 execution context was created.
+2019-11-20 16:21:14,118 file.rtobject INFO Initial active configuration set is default.
+2019-11-20 16:21:26,217 file.ManagerServant INFO Master manager not found
+2019-11-20 16:21:29,002 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-20 16:21:29,003 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-20 16:21:38,450 file.ManagerServant INFO Master manager not found
+2019-11-20 16:21:47,201 file.rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\OpenRTM_aist\RTObject.py", line 1571, in on_execute
+    ret = self.onExecute(ec_id)
+  File "c:\workspace\Human_Tracking_py\Human_Tracking_py.py", line 185, in onExecute
+    x_seq=np.dot(r_seq,np.cos(th_seq))
+ValueError: shapes (800,) and (681,) not aligned: 800 (dim 0) != 681 (dim 0)
+
+2019-11-20 16:21:50,680 file.ManagerServant INFO Master manager not found
+2019-11-20 16:22:02,957 file.ManagerServant INFO Master manager not found
+2019-11-20 16:22:15,206 file.ManagerServant INFO Master manager not found
+2019-11-20 16:22:27,482 file.ManagerServant INFO Master manager not found
+2019-11-20 16:22:39,752 file.ManagerServant INFO Master manager not found
+2019-11-20 16:22:52,025 file.ManagerServant INFO Master manager not found
+2019-11-20 16:23:04,296 file.ManagerServant INFO Master manager not found
+2019-11-20 16:23:16,542 file.ManagerServant INFO Master manager not found

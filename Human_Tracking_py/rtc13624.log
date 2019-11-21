@@ -1,0 +1,41 @@
+2019-11-21 15:49:29,759 file.manager INFO 1.2.0
+2019-11-21 15:49:29,759 file.manager INFO Copyright (C) 2003-2010
+2019-11-21 15:49:29,760 file.manager INFO   Noriaki Ando
+2019-11-21 15:49:29,760 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-21 15:49:29,760 file.manager INFO Manager starting.
+2019-11-21 15:49:29,762 file.manager INFO Starting local logging.
+2019-11-21 15:49:29,766 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-21 15:49:31,792 file.ManagerServant INFO Master manager not found
+2019-11-21 15:49:31,798 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:49:31,799 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:49:31,819 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-21 15:49:31,835 file.ec_base INFO setRate(1000000.000000) done
+2019-11-21 15:49:31,836 file.ec_base INFO setRate(1000.000000) done
+2019-11-21 15:49:31,841 file.rtobject INFO 1 execution context was created.
+2019-11-21 15:49:31,861 file.rtobject INFO Initial active configuration set is default.
+2019-11-21 15:49:35,161 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-21 15:49:35,163 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-21 15:49:44,010 file.ManagerServant INFO Master manager not found
+2019-11-21 15:49:56,282 file.ManagerServant INFO Master manager not found
+2019-11-21 15:50:08,503 file.ManagerServant INFO Master manager not found
+2019-11-21 15:50:20,719 file.ManagerServant INFO Master manager not found
+2019-11-21 15:50:32,950 file.ManagerServant INFO Master manager not found
+2019-11-21 15:50:45,230 file.ManagerServant INFO Master manager not found
+2019-11-21 15:50:57,474 file.ManagerServant INFO Master manager not found
+2019-11-21 15:51:09,723 file.ManagerServant INFO Master manager not found
+2019-11-21 15:51:21,973 file.ManagerServant INFO Master manager not found
+2019-11-21 15:51:34,232 file.ManagerServant INFO Master manager not found
+2019-11-21 15:51:46,470 file.ManagerServant INFO Master manager not found
+2019-11-21 15:51:58,694 file.ManagerServant INFO Master manager not found
+2019-11-21 15:52:10,960 file.ManagerServant INFO Master manager not found
+2019-11-21 15:52:23,203 file.ManagerServant INFO Master manager not found
+2019-11-21 15:52:35,456 file.ManagerServant INFO Master manager not found
+2019-11-21 15:52:47,684 file.ManagerServant INFO Master manager not found
+2019-11-21 15:52:59,926 file.ManagerServant INFO Master manager not found
+2019-11-21 15:53:12,167 file.ManagerServant INFO Master manager not found
+2019-11-21 15:53:24,420 file.ManagerServant INFO Master manager not found
+2019-11-21 15:53:36,667 file.ManagerServant INFO Master manager not found
+2019-11-21 15:53:48,891 file.ManagerServant INFO Master manager not found
+2019-11-21 15:54:01,115 file.ManagerServant INFO Master manager not found
+2019-11-21 15:54:13,365 file.ManagerServant INFO Master manager not found
+2019-11-21 15:54:25,654 file.ManagerServant INFO Master manager not found

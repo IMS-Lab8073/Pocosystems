@@ -1,0 +1,28 @@
+2019-11-21 15:38:11,562 file.manager INFO 1.2.0
+2019-11-21 15:38:11,563 file.manager INFO Copyright (C) 2003-2010
+2019-11-21 15:38:11,563 file.manager INFO   Noriaki Ando
+2019-11-21 15:38:11,565 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-21 15:38:11,565 file.manager INFO Manager starting.
+2019-11-21 15:38:11,565 file.manager INFO Starting local logging.
+2019-11-21 15:38:11,569 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-21 15:38:13,598 file.ManagerServant INFO Master manager not found
+2019-11-21 15:38:13,602 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:38:13,605 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-21 15:38:13,621 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-21 15:38:13,632 file.ec_base INFO setRate(1000000.000000) done
+2019-11-21 15:38:13,634 file.ec_base INFO setRate(1000.000000) done
+2019-11-21 15:38:13,638 file.rtobject INFO 1 execution context was created.
+2019-11-21 15:38:13,651 file.rtobject INFO Initial active configuration set is default.
+2019-11-21 15:38:15,529 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-21 15:38:15,530 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-21 15:38:25,568 file.rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\OpenRTM_aist\RTObject.py", line 1571, in on_execute
+    ret = self.onExecute(ec_id)
+  File "c:\workspace\Human_Tracking_py\Human_Tracking_py.py", line 179, in onExecute
+    r_seq=np.array(range_data)
+NameError: global name 'range_data' is not defined
+
+2019-11-21 15:38:25,806 file.ManagerServant INFO Master manager not found
+2019-11-21 15:38:38,084 file.ManagerServant INFO Master manager not found
+2019-11-21 15:38:50,365 file.ManagerServant INFO Master manager not found
+2019-11-21 15:39:02,589 file.ManagerServant INFO Master manager not found
