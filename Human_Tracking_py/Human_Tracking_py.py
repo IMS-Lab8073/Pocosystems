@@ -156,6 +156,10 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 		# listが返ってくるので，注意
 		#self.lines, = self.ax.plot(self._x, self._y)
 		######################################################
+		### 背景差分法##########################################
+		self.first_flag=0
+		#######################################################
+
 
 		return RTC.RTC_OK
 	
@@ -221,26 +225,21 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 			#print("######self.y_seq######")
 			#print(self.y_seq)
 			###########################################################################
+			
+			### 背景差分法用元のデータ#####
+			if self.first_flag==0:
+				self.x0=self.x_seq
+				self.y0=self.y_seq
+				self.first_flag+=1
+			#############################
 
-			"""
-			print("#####x_seqence######")
-			print(self.x_seq)
-			print("#####y_seqence######")
-			print(self.y_seq)
-			"""
-			#a=trans_x_y(self.range_data[i],i)
-			#print(a)
-			#self._x =round(a[0],3)
-			#self._y =round(a[1],3)
-			#print(self._x)
-			#print(self._y)
-			#self.x_seq.append(self._x) # urgのxのデータ
-			#self.y_seq.append(self._y) # urgのyのデータ
+			### plot用データに格納 ###
 			global rand_x,rand_y
 			rand_x=self.x_seq
 			rand_y=self.y_seq
+			#########################
 		return RTC.RTC_OK
-
+		
 '''
 def trans_x_y(r, n):
 	beg_angle = -30 # LRFの始まりの角度
