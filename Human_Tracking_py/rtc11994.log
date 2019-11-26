@@ -1,0 +1,53 @@
+2019-11-26 04:18:24,454 file.manager INFO 1.2.0
+2019-11-26 04:18:24,454 file.manager INFO Copyright (C) 2003-2010
+2019-11-26 04:18:24,455 file.manager INFO   Noriaki Ando
+2019-11-26 04:18:24,455 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-26 04:18:24,455 file.manager INFO Manager starting.
+2019-11-26 04:18:24,455 file.manager INFO Starting local logging.
+2019-11-26 04:18:24,459 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-26 04:18:24,479 file.ManagerServant INFO Master manager not found
+2019-11-26 04:18:24,486 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 04:18:24,487 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 04:18:24,500 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-26 04:18:24,510 file.ec_base INFO setRate(1000000.000000) done
+2019-11-26 04:18:24,510 file.ec_base INFO setRate(1000.000000) done
+2019-11-26 04:18:24,513 file.rtobject INFO 1 execution context was created.
+2019-11-26 04:18:24,524 file.rtobject INFO Initial active configuration set is default.
+2019-11-26 04:18:30,223 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-26 04:18:30,223 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-26 04:18:34,545 file.ManagerServant INFO Master manager not found
+2019-11-26 04:18:35,421 file.ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2019-11-26 04:18:44,668 file.ManagerServant INFO Master manager not found
+2019-11-26 04:18:54,841 file.ManagerServant INFO Master manager not found
+2019-11-26 04:19:04,960 file.ManagerServant INFO Master manager not found
+2019-11-26 04:19:15,096 file.ManagerServant INFO Master manager not found
+2019-11-26 04:19:25,253 file.ManagerServant INFO Master manager not found
+2019-11-26 04:19:35,410 file.ManagerServant INFO Master manager not found
+2019-11-26 04:19:45,536 file.ManagerServant INFO Master manager not found
+2019-11-26 04:19:55,696 file.ManagerServant INFO Master manager not found
+2019-11-26 04:20:05,825 file.ManagerServant INFO Master manager not found
+2019-11-26 04:20:15,936 file.ManagerServant INFO Master manager not found
+2019-11-26 04:20:26,072 file.ManagerServant INFO Master manager not found
+2019-11-26 04:20:36,223 file.ManagerServant INFO Master manager not found
+2019-11-26 04:20:46,359 file.ManagerServant INFO Master manager not found
+2019-11-26 04:20:56,503 file.ManagerServant INFO Master manager not found
+2019-11-26 04:21:06,642 file.ManagerServant INFO Master manager not found
+2019-11-26 04:21:16,763 file.ManagerServant INFO Master manager not found
+2019-11-26 04:21:26,909 file.ManagerServant INFO Master manager not found
+2019-11-26 04:21:37,061 file.ManagerServant INFO Master manager not found
+2019-11-26 04:21:47,182 file.ManagerServant INFO Master manager not found
+2019-11-26 04:21:56,586 file.rtobject ERROR Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/OpenRTM_aist/RTObject.py", line 1571, in on_execute
+    ret = self.onExecute(ec_id)
+  File "/home/soka/workspace/Pocosystems/Human_Tracking_py/Human_Tracking_py.py", line 179, in onExecute
+    n=np.arange(681) # ステップ数
+AttributeError: 'NoneType' object has no attribute 'arange'
+
+2019-11-26 04:21:56,595 file.rtobject ERROR Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/OpenRTM_aist/RTObject.py", line 1370, in on_deactivated
+    ret = self.onDeactivated(ec_id)
+  File "/home/soka/workspace/Pocosystems/Human_Tracking_py/Human_Tracking_py.py", line 168, in onDeactivated
+    return RTC.RTC_OK
+AttributeError: 'NoneType' object has no attribute 'RTC_OK'
+
+2019-11-26 04:21:57,295 file.ManagerServant INFO Master manager not found

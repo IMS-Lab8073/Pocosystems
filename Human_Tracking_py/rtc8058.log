@@ -1,0 +1,21 @@
+2019-11-26 03:59:22,259 file.manager INFO 1.2.0
+2019-11-26 03:59:22,259 file.manager INFO Copyright (C) 2003-2010
+2019-11-26 03:59:22,259 file.manager INFO   Noriaki Ando
+2019-11-26 03:59:22,260 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-26 03:59:22,260 file.manager INFO Manager starting.
+2019-11-26 03:59:22,260 file.manager INFO Starting local logging.
+2019-11-26 03:59:22,263 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-26 03:59:22,276 file.ManagerServant INFO Master manager not found
+2019-11-26 03:59:22,280 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 03:59:22,282 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 03:59:22,290 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-26 03:59:22,301 file.ec_base INFO setRate(1000000.000000) done
+2019-11-26 03:59:22,303 file.ec_base INFO setRate(1000.000000) done
+2019-11-26 03:59:22,306 file.rtobject INFO 1 execution context was created.
+2019-11-26 03:59:22,318 file.rtobject INFO Initial active configuration set is default.
+2019-11-26 03:59:24,827 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-26 03:59:24,831 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-26 03:59:29,078 file.InPortConnector ERROR unknown endian from connector
+2019-11-26 03:59:29,080 file.InPortConnector ERROR unknown endian from connector
+2019-11-26 03:59:29,080 file.InPortConnector ERROR unknown endian from connector
+2019-11-26 03:59:32,379 file.ManagerServant INFO Master manager not found

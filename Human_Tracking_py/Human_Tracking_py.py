@@ -30,8 +30,8 @@ pg.setConfigOptions(antialias=True)
 # Import Service implementation class
 # <rtc-template block="service_impl">
 
-rand_x=np.random.rand(1000)*20-10
-rand_y=np.random.rand(1000)*20-10
+plot_x=np.zeros(681)
+plot_y=np.zeros(681)
 
 # </rtc-template>
 
@@ -94,24 +94,13 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 		"""
 		self._LRF_range=[4]
 
-		self._x=0
-		self._y=0
+		self.diff_x0 = np.zeros(681) #背景差分初期値
+		self.diff_y0 = np.zeros(681)
+
 		self.x_seq=[]
 		self.y_seq=[]
 		
-
-		# canvas properties
-		#self.width = width
-		#self.height = height
-		# zero of canvas
-		#self.x0 = width/2
-		#self.y0 = height/2
-
-		#self.wd = 150
-		#self.canvas = canvas
-
-		#self.after(20, self.on_update)
-
+		self.first_flag = False
 
 		# initialize of configuration-data.
 		# <rtc-template block="init_conf_param">
@@ -147,19 +136,8 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 		return RTC.RTC_OK
 	
 	def onActivated(self, ec_id):
-		### matplot########################################
-		#fig,self.ax = plt.subplots(1, 1)
-		self._x=0
-		self._y=0
-		# 初期化的に一度plotしなければならない
-		# そのときplotしたオブジェクトを受け取る受け取る必要がある．
-		# listが返ってくるので，注意
-		#self.lines, = self.ax.plot(self._x, self._y)
-		######################################################
-		### 背景差分法##########################################
-		self.first_flag=0
-		#######################################################
 
+		self.first_flag = True
 
 		return RTC.RTC_OK
 	
@@ -178,79 +156,57 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 			offset_step = 0
 			n=np.arange(681) # ステップ数
 			th_seq= np.deg2rad((n + offset_step) * angle_per_step + beg_angle) # ラジアン
-			#print("#####theta_seqence######")
-			#print(th_seq)
 			r_seq=np.array(self.range_data)
-			#print("#####r_seqence_before######")
-			#print(r_seq)
 			
-			####外れ値の計算#######################################################
-			r_seq=np.where(r_seq>4000,0,r_seq)
-			r_seq=np.where(r_seq<10,0,r_seq)
-			#print("#####r_seqence_after######")
-			#print(r_seq)
-			#print(len(r_seq))
+			r_seq = np.where((r_seq > 4000) & (r_seq < 10), 0, r_seq) #10<r<4000以外は0に置換
 
-			r_mean = r_seq.mean()
-			#print("####mean#####")
-			#print(r_mean)
+			r_seq = Removalfun(r_seq)
 
-			r_sigma = r_seq.std()
-			#print("####sigma#####")
-			#print(r_sigma)
+			r_shape = r_seq[0:681].shape
+			th_shape = th_seq.shape
 
-			r_low = r_mean - 3 * r_sigma
-			#print("####low#####")
-			#print(r_low)
+			#print "r" + str(r_shape)
+			#print "th" + str(th_shape)
 
-			r_high = r_mean + 3 * r_sigma
-			#print("####high#####")
-			#print(r_high)
+			x_seq_raw=r_seq[0:681]*np.cos(th_seq)	# xに変換 #726
+			y_seq_raw=r_seq[0:681]*np.sin(th_seq)	# yに変換 #726
 
-			r_seq=np.where(r_seq < r_low , 0, r_seq)
-			r_seq=np.where(r_seq > r_high , 0, r_seq)
-
-			x_seq_raw=r_seq[45:726]*np.cos(th_seq)	# xに変換
-			y_seq_raw=r_seq[45:726]*np.sin(th_seq)	# yに変換
+			#x_seq_raw=r_seq[45:726]*np.cos(th_seq)	# xに変換 #726
+			#y_seq_raw=r_seq[45:726]*np.sin(th_seq)	# yに変換 #726
 			#print("######x_seq_raw######")
 			#print(x_seq_raw)
 			#print("######y_seq_raw######")
 			#print(y_seq_raw)
 
-			self.x_seq=np.delete(x_seq_raw,np.where(x_seq_raw==0)) # xが0だったら消す
+			x_seq_move = np.where(x_seq_raw != self.diff_x0)
+			y_seq_move = np.where(y_seq_raw != self.diff_y0)
+
+			#self.x_seq=np.delete(x_seq_raw,np.where(x_seq_raw==0)) # xが0だったら消す
 			#print("######self.x_seq######")
 			#print(self.x_seq)
 
-			self.y_seq=np.delete(y_seq_raw,np.where(y_seq_raw==0)) # xが0だったら消す
+			#self.y_seq=np.delete(y_seq_raw,np.where(y_seq_raw==0)) # xが0だったら消す
 			#print("######self.y_seq######")
 			#print(self.y_seq)
 			###########################################################################
 			
 			### 背景差分法用元のデータ#####
-			if self.first_flag==0:
-				self.x0=self.x_seq
-				self.y0=self.y_seq
-				self.first_flag+=1
-			#############################
+			if self.first_flag == True:
+				self.diff_x0 = 1000*x_seq_raw
+				self.diff_y0 = 1000*y_seq_raw
+				self.first_flag == False
 
 			### plot用データに格納 ###
-			global rand_x,rand_y
-			rand_x=self.x_seq
-			rand_y=self.y_seq
-			#########################
+			global plot_x, plot_y
+			plot_x = 1000*x_seq_raw  # self.x_seq
+			plot_y = 1000*y_seq_raw  # self.y_seq
+
+			#print plot_x
+			#print plot_y
+
+
 		return RTC.RTC_OK
 		
-'''
-def trans_x_y(r, n):
-	beg_angle = -30 # LRFの始まりの角度
-	angle_per_step=360.0/1024.0 # 角度分解能
-	offset_step = 0
-	th = (n + offset_step) * angle_per_step + beg_angle
-	x=r*np.cos(th)
-	y=r*np.sin(th)
-	xy=[x,y]
-	return xy
-'''
 class PlotWindow:
     def __init__(self):
 		#プロット初期設定
@@ -272,10 +228,20 @@ class PlotWindow:
 		self.timer.start(1)    #10msごとにupdateを呼び出し
 
     def update(self):
-		self.data_x = rand_x
-		self.data_y = rand_y
-		self.curve.setData(rand_x,rand_y,pen=None,symbol='o')   #プロットデータを格納
+		self.curve.setData(plot_x,plot_y,pen=None,symbol='o')   #プロットデータを格納
 
+
+def Removalfun(seq):
+	#3sigma
+	mean = seq.mean()#平均値
+	sigma = seq.std()#標準偏差
+
+	low = mean - 3 * sigma
+	high = mean + 3 * sigma
+
+	sol = np.where((seq < low) & (seq > high), 0, seq)
+
+	return sol
 
 def Human_Tracking_pyInit(manager):
 		profile = OpenRTM_aist.Properties(defaults_str=human_tracking_py_spec)

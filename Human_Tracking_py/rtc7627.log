@@ -1,0 +1,28 @@
+2019-11-26 03:58:21,690 file.manager INFO 1.2.0
+2019-11-26 03:58:21,693 file.manager INFO Copyright (C) 2003-2010
+2019-11-26 03:58:21,694 file.manager INFO   Noriaki Ando
+2019-11-26 03:58:21,694 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-26 03:58:21,695 file.manager INFO Manager starting.
+2019-11-26 03:58:21,695 file.manager INFO Starting local logging.
+2019-11-26 03:58:21,699 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-26 03:58:21,713 file.ManagerServant INFO Master manager not found
+2019-11-26 03:58:21,716 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 03:58:21,717 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 03:58:21,724 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-26 03:58:21,729 file.ec_base INFO setRate(1000000.000000) done
+2019-11-26 03:58:21,730 file.ec_base INFO setRate(1000.000000) done
+2019-11-26 03:58:21,732 file.rtobject INFO 1 execution context was created.
+2019-11-26 03:58:21,738 file.rtobject INFO Initial active configuration set is default.
+2019-11-26 03:58:25,234 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-26 03:58:25,236 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-26 03:58:30,554 file.ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2019-11-26 03:58:31,798 file.ManagerServant INFO Master manager not found
+2019-11-26 03:58:32,672 file.ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2019-11-26 03:58:35,680 file.rtobject ERROR Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/OpenRTM_aist/RTObject.py", line 1571, in on_execute
+    ret = self.onExecute(ec_id)
+  File "/home/soka/workspace/Pocosystems/Human_Tracking_py/Human_Tracking_py.py", line 190, in onExecute
+    print "r" + r_shape
+TypeError: cannot concatenate 'str' and 'tuple' objects
+
+2019-11-26 03:58:41,913 file.ManagerServant INFO Master manager not found

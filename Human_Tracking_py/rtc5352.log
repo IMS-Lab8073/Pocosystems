@@ -1,0 +1,30 @@
+2019-11-26 03:46:37,457 file.manager INFO 1.2.0
+2019-11-26 03:46:37,458 file.manager INFO Copyright (C) 2003-2010
+2019-11-26 03:46:37,458 file.manager INFO   Noriaki Ando
+2019-11-26 03:46:37,458 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-26 03:46:37,458 file.manager INFO Manager starting.
+2019-11-26 03:46:37,458 file.manager INFO Starting local logging.
+2019-11-26 03:46:37,461 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-26 03:46:37,471 file.ManagerServant INFO Master manager not found
+2019-11-26 03:46:37,474 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 03:46:37,475 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 03:46:37,488 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-26 03:46:37,496 file.ec_base INFO setRate(1000000.000000) done
+2019-11-26 03:46:37,497 file.ec_base INFO setRate(1000.000000) done
+2019-11-26 03:46:37,500 file.rtobject INFO 1 execution context was created.
+2019-11-26 03:46:37,507 file.rtobject INFO Initial active configuration set is default.
+2019-11-26 03:46:41,708 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-26 03:46:41,708 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-26 03:46:47,573 file.ManagerServant INFO Master manager not found
+2019-11-26 03:46:54,048 file.InPortConnector ERROR unknown endian from connector
+2019-11-26 03:46:56,535 file.rtobject ERROR Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/OpenRTM_aist/RTObject.py", line 1571, in on_execute
+    ret = self.onExecute(ec_id)
+  File "/home/soka/workspace/Pocosystems/Human_Tracking_py/Human_Tracking_py.py", line 187, in onExecute
+    x_seq_raw=r_seq[46:726]*np.cos(th_seq)	# xに変換 #726
+ValueError: operands could not be broadcast together with shapes (636,) (681,) 
+
+2019-11-26 03:46:57,670 file.ManagerServant INFO Master manager not found
+2019-11-26 03:46:59,775 file.ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2019-11-26 03:46:59,799 file.ec_worker WARNING ExecutionContext is already stopped.
+2019-11-26 03:46:59,799 file.ec_base ERROR Invoking on_shutdown() for each RTC failed.

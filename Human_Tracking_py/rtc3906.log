@@ -1,0 +1,28 @@
+2019-11-26 03:38:29,145 file.manager INFO 1.2.0
+2019-11-26 03:38:29,147 file.manager INFO Copyright (C) 2003-2010
+2019-11-26 03:38:29,148 file.manager INFO   Noriaki Ando
+2019-11-26 03:38:29,149 file.manager INFO   Intelligent Systems Research Institute, AIST
+2019-11-26 03:38:29,149 file.manager INFO Manager starting.
+2019-11-26 03:38:29,150 file.manager INFO Starting local logging.
+2019-11-26 03:38:29,155 file.manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2019-11-26 03:38:29,168 file.ManagerServant INFO Master manager not found
+2019-11-26 03:38:29,171 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 03:38:29,172 file.LocalServiceAdmin INFO All the local services are enabled.
+2019-11-26 03:38:29,180 file.manager INFO Component type conf file: Human_Tracking_py.conf loaded.
+2019-11-26 03:38:29,186 file.ec_base INFO setRate(1000000.000000) done
+2019-11-26 03:38:29,186 file.ec_base INFO setRate(1000.000000) done
+2019-11-26 03:38:29,188 file.rtobject INFO 1 execution context was created.
+2019-11-26 03:38:29,195 file.rtobject INFO Initial active configuration set is default.
+2019-11-26 03:38:39,239 file.ManagerServant INFO Master manager not found
+2019-11-26 03:38:46,835 file.SdoServiceAdmin WARNING No available SDO service in the factory: 
+2019-11-26 03:38:46,835 file.SdoServiceAdmin ERROR type  already exists.
+2019-11-26 03:38:49,344 file.ManagerServant INFO Master manager not found
+2019-11-26 03:38:59,454 file.ManagerServant INFO Master manager not found
+2019-11-26 03:39:07,946 file.rtobject ERROR Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/OpenRTM_aist/RTObject.py", line 1571, in on_execute
+    ret = self.onExecute(ec_id)
+  File "/home/soka/workspace/Pocosystems/Human_Tracking_py/Human_Tracking_py.py", line 187, in onExecute
+    x_seq_raw=r_seq[45:726]*np.cos(th_seq)	# xに変換 #726
+ValueError: operands could not be broadcast together with shapes (637,) (681,) 
+
+2019-11-26 03:39:09,547 file.ManagerServant INFO Master manager not found
