@@ -150,7 +150,6 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 			_rangeData = self._Range_dataIn.read()
 			self.range_data = _rangeData.ranges
 
-			#print(self.range_data[100])
 			beg_angle = -30 # LRFの始まりの角度
 			angle_per_step=360.0/1024.0 # 角度分解能
 			offset_step = 0
@@ -158,7 +157,8 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 			th_seq= np.deg2rad((n + offset_step) * angle_per_step + beg_angle) # ラジアン
 			r_seq=np.array(self.range_data)
 			
-			r_seq = np.where((r_seq > 4000) & (r_seq < 10), 0, r_seq) #10<r<4000以外は0に置換
+			#r_seq = np.where((r_seq > 4000) & (r_seq < 10), 0, r_seq) #10<r<4000以外は0に置換
+			r_seq = np.where(r_seq > 4000, 4000, r_seq) # r<4000以上は4000に置換
 
 			r_seq = Removalfun(r_seq)
 
@@ -168,18 +168,16 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 			#print "r" + str(r_shape)
 			#print "th" + str(th_shape)
 
-			x_seq_raw=r_seq[0:681]*np.cos(th_seq)	# xに変換 #726
-			y_seq_raw=r_seq[0:681]*np.sin(th_seq)	# yに変換 #726
+			x_seq_raw = r_seq[0:681] * np.cos(th_seq)	# xに変換 #726
+			y_seq_raw = r_seq[0:681] * np.sin(th_seq)	# yに変換 #726
 
-			#x_seq_raw=r_seq[45:726]*np.cos(th_seq)	# xに変換 #726
-			#y_seq_raw=r_seq[45:726]*np.sin(th_seq)	# yに変換 #726
-			#print("######x_seq_raw######")
-			#print(x_seq_raw)
-			#print("######y_seq_raw######")
-			#print(y_seq_raw)
+			# x_seq_raw=r_seq[45:726]*np.cos(th_seq)	# xに変換 #726
+			# y_seq_raw=r_seq[45:726]*np.sin(th_seq)	# yに変換 #726
+			# print("######x_seq_raw######")
+			# print(x_seq_raw)
+			# print("######y_seq_raw######")
+			# print(y_seq_raw)
 
-			x_seq_move = np.where(x_seq_raw != self.diff_x0)
-			y_seq_move = np.where(y_seq_raw != self.diff_y0)
 
 			#self.x_seq=np.delete(x_seq_raw,np.where(x_seq_raw==0)) # xが0だったら消す
 			#print("######self.x_seq######")
@@ -188,23 +186,35 @@ class Human_Tracking_py(OpenRTM_aist.DataFlowComponentBase):
 			#self.y_seq=np.delete(y_seq_raw,np.where(y_seq_raw==0)) # xが0だったら消す
 			#print("######self.y_seq######")
 			#print(self.y_seq)
-			###########################################################################
 			
-			### 背景差分法用元のデータ#####
+			### 背景差分法 start #############################################################
+			
+			### 背景差分法用元のデータ #########
 			if self.first_flag == True:
-				self.diff_x0 = 1000*x_seq_raw
-				self.diff_y0 = 1000*y_seq_raw
+				self.diff_x0 = x_seq_raw
+				#self.diff_x0 = 1000 * x_seq_raw
+				self.diff_y0 = y_seq_raw
+				#self.diff_y0 = 1000 * y_seq_raw
 				self.first_flag == False
+			##################################
 
-			### plot用データに格納 ###
+			x_seq_move = np.where(x_seq_raw != self.diff_x0) # 元データじゃないなら移動体x
+			y_seq_move = np.where(y_seq_raw != self.diff_y0) # 元データじゃないなら移動体y
+
+			### 背景差分法 end ########################################################
+
+			### plot用データに格納 ##################
 			global plot_x, plot_y
-			plot_x = 1000*x_seq_raw  # self.x_seq
-			plot_y = 1000*y_seq_raw  # self.y_seq
+			plot_x = x_seq_raw  # self.x_seq
+			plot_y = y_seq_raw  # self.y_seq
 
-			#print plot_x
-			#print plot_y
-
-
+			#plot_x = 1000*x_seq_raw  # self.x_seq
+			#plot_y = 1000*y_seq_raw  # self.y_seq
+			########################################
+			
+			# print plot_x
+			# print plot_y
+			get_pre_r_seq(r_seq)
 		return RTC.RTC_OK
 		
 class PlotWindow:
@@ -230,16 +240,19 @@ class PlotWindow:
     def update(self):
 		self.curve.setData(plot_x,plot_y,pen=None,symbol='o')   #プロットデータを格納
 
+def get_pre_r_seq(seq):
+	pre_r_seq = seq
+	return pre_r_seq
 
 def Removalfun(seq):
-	#3sigma
-	mean = seq.mean()#平均値
-	sigma = seq.std()#標準偏差
+	# 3sigma
+	mean = seq.mean() # 平均値
+	sigma = seq.std() # 標準偏差
 
 	low = mean - 3 * sigma
 	high = mean + 3 * sigma
 
-	sol = np.where((seq < low) & (seq > high), 0, seq)
+	sol = np.where((seq < low) & (seq > high), get_pre_r_seq, seq)
 
 	return sol
 
